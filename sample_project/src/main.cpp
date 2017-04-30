@@ -148,7 +148,7 @@ int main(int argc, char** argv) {
 	// init libs
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
 	IMG_Init(IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_PNG);
-	window = SDL_CreateWindow("i want to break free", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("sample project", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	
 	// init game
