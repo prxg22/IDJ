@@ -1,6 +1,6 @@
 #include "State.hpp"
 
-State::State() : _quitRequested(false), bg("background.jpg") {}
+State::State() : _quitRequested(false), bg("../assets/img/ocean.jpg") {}
 
 bool State::quitRequested() const {
 	return _quitRequested;
