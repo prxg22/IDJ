@@ -5,7 +5,7 @@
 # flag para tirar o console na versao final: -mwindows
 
 # parameters
-EXE      = i_want_to_break_free.exe
+EXE      = sample_project.exe
 LIBS     = -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2
 
 CXX      = g++ -std=c++11
