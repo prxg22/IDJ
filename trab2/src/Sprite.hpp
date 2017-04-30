@@ -8,7 +8,7 @@
 class Sprite {
 	private:
 		SDL_Texture* texture;
-		int w, h;
+		int width, height;
 		SDL_Rect clipRect;
 	public:
 		Sprite();
@@ -17,7 +17,10 @@ class Sprite {
 		void open(const std::string& file_name);
 		void setClip(int x, int y, int w, int h);
 		void close();
-		void render(int x, int y);
+		void render(int x, int y) const;
+		int getWidth() const;
+		int getHeight() const;
+		bool isOpen() const;
 };
 
 

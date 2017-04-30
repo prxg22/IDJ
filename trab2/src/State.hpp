@@ -10,7 +10,7 @@ class State{
 		
 	public:
 		State();
-		bool quitRequested();
+		bool quitRequested() const;
 		void requestQuit();
 		void update(float dt);
 		void render();

@@ -1,26 +1,14 @@
 #include "Game.hpp"
 
 #include <cstdio>
-#include <iostream>
 
 #include <SDL2/SDL_image.h>
-#include "Rect.hpp"
-#include "Vec2.hpp"
 
 static Uint32 fixed_step = 30; // milliseconds
 
 Game* Game::instance = nullptr;
 
 Game::Game(const std::string& title, int width, int height) {
-	Vec2f a(50.16, 10),b,c,d;
-	b = {x: 10.20, y:89.6};
-	
-	printf("qualquer coisa\n");
-	c = a + b;
-	std::cout << "Resultado add x: " << c.x << " y: " << c.y << "\n";
-	std::cout << "Resultado norm(a): " << a.norm() << "\n";
-	std::cout << "Resultado norm2(a): " << b.norm2() << "\n";
-	
 	if(instance != nullptr){
 		exit(-1);
 	}
@@ -29,7 +17,7 @@ Game::Game(const std::string& title, int width, int height) {
 	
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
 	IMG_Init(IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_PNG);
-	window = SDL_CreateWindow("i want to break free", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	
 	state = new State();
@@ -86,10 +74,10 @@ void Game::run() {
 	}
 }
 
-SDL_Renderer* Game::getRenderer(){
+SDL_Renderer* Game::getRenderer() const {
 	return renderer;
 }
 
-State& Game::getState(){
+State& Game::getState() const {
 	return *state;
 }

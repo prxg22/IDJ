@@ -43,12 +43,7 @@ Vec2<T>::Vec2(T x, T y) : x(x), y(y) {
 template <typename T>
 Vec2<T> Vec2<T>::operator+(const Vec2& o) const {
 	Vec2<T> v = *this;
-
-	printf("operator + : %p\n", this);
-	printf("endereco v :  %p\n", &v);
-
 	v += o;
-
 	return v;
 }
 
@@ -56,8 +51,6 @@ template <typename T>
 Vec2<T>& Vec2<T>::operator+=(const Vec2& o){
 	x += o.x;
 	y += o.y;
-
-	printf("operator += :%p\n", this);
 	return *this;
 }
 
