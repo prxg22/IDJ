@@ -2,7 +2,7 @@
 
 State::State() : _quitRequested(false), bg("background.jpg") {}
 
-bool State::quitRequested() {
+bool State::quitRequested() const {
 	return _quitRequested;
 }
 
