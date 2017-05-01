@@ -21,6 +21,7 @@ class Game{
 		void run();
 		SDL_Renderer* getRenderer() const;
 		State& getState() const;
+		std::string getPath() const;
 };
 
 #endif

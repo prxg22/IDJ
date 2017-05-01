@@ -21,7 +21,8 @@ Sprite::~Sprite() {
 
 void Sprite::open(const std::string& file_name) {
 	close();
-	texture = IMG_LoadTexture(Game::getInstance().getRenderer(),file_name.c_str());
+	std::string path = Game::getInstance().getPath() + "/img/" + file_name;
+	texture = IMG_LoadTexture(Game::getInstance().getRenderer(),path.c_str());
 	if (texture == nullptr) {
 		fprintf(stderr, "%s\n", SDL_GetError());
 		return;

@@ -4,6 +4,10 @@
 #include <cmath>
 #include <cstdio>
 
+#define PI 3.14159265359f
+#define DEG2RAD(x) (PI * x / 180.0f)
+#define RAD2DEG(x) (180.0f * x / PI)
+
 template <typename T>
 class Vec2{
 
@@ -25,20 +29,18 @@ public:
 	T size2() const;
 	T length2() const;
 	T len2() const;
+	
+	Vec2 rotate(float deg) const;
 };
 
 typedef Vec2<float>	Vec2f;
 typedef Vec2<int>	Vec2i;
 
 template <typename T>
-Vec2<T>::Vec2() : x(0), y(0) {
-	printf("vazio\n");
-}
+Vec2<T>::Vec2() : x(0), y(0) {}
 
 template <typename T>
-Vec2<T>::Vec2(T x, T y) : x(x), y(y) {
-	printf("show (%.2f, %.2f)\n", x, y);
-}
+Vec2<T>::Vec2(T x, T y) : x(x), y(y) {}
 
 template <typename T>
 Vec2<T> Vec2<T>::operator+(const Vec2& o) const {
@@ -89,5 +91,16 @@ T Vec2<T>::len2() const{
 	return norm2();
 }
 
+template <typename T>
+Vec2<T> Vec2<T>::rotate(float deg) const {
+	Vec2<T> v;
+	float rad = DEG2RAD(deg);
+	float c = cos(rad), s = sin(rad);
+	
+	v.x = x * c - y * s;
+	v.y = y * c + x * s;
+	
+	return v;
+}
 
 #endif

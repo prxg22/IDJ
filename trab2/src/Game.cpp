@@ -38,14 +38,6 @@ Game& Game::getInstance(){
 
 void Game::run() {
 	while (!state->quitRequested()) {
-		// input 
-		SDL_Event event;
-		while (!state->quitRequested() && SDL_PollEvent(&event)) {
-			if(event.type == SDL_QUIT) {
-				state->requestQuit();
-			}
-		}
-
 		// inicializa o primeiro last_time
 		static Uint32 last_time = 0;
 
@@ -80,4 +72,8 @@ SDL_Renderer* Game::getRenderer() const {
 
 State& Game::getState() const {
 	return *state;
+}
+
+std::string Game::getPath() const {
+	return "../assets";
 }
