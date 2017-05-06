@@ -5,14 +5,17 @@
 
 #include "Game.hpp"
 
-Tilemap::Tilemap(const std::string& file, Tileset* tileset){
-	load(file);
-	setTileset(tileset);
-}
-
-void Tilemap::load(const std::string& file) {
-	std::string path = Game::getInstance().getPath() + "/map/" + file;
+Tilemap::Tilemap(const std::string& path){
 	std::fstream f(path);
+	
+	int setCols, setRows;
+	std::string setName;
+	f >> setCols;
+	f.get();
+	f >> setRows;
+	f.get();
+	f >> setName;
+	tileset = new Tileset(setCols, setRows, setName);
 	f >> width;
 	f.get(); // tira a virgula
 	f >> height;
@@ -31,11 +34,9 @@ void Tilemap::load(const std::string& file) {
 		}
 	}
 }
-
-void Tilemap::setTileset(Tileset* tileset) {
-	this->tileset = tileset;
+Tilemap::~Tilemap(){
+	delete tileset;
 }
-
 void Tilemap::render(int cameraX, int cameraY) {
 	for(int z = 0; z < depth; z++){
 		renderLayer(z, cameraX, cameraY);

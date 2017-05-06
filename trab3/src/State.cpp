@@ -2,8 +2,9 @@
 
 #include "Face.hpp"
 #include "Vec2.hpp"
+#include "Game.hpp"
 
-State::State() : _quitRequested(false), bg("ocean.jpg"), tileset(6, 3, "tileset.png"), tilemap("tileMap.txt", &tileset) {}
+State::State() : _quitRequested(false), bg("ocean.jpg"), tilemap(Game::getInstance().resources.getTilemap("tileMap.txt")) {}
 State::~State() {}
 
 bool State::quitRequested() const {
@@ -24,11 +25,12 @@ void State::update(float dt){
 
 void State::render() {
 	bg.render(0, 0);
-	tilemap.render(200, 200);
+	tilemap->renderLayer(0);
 	for (auto& obj : objectList)
 	{
 		obj->render();
 	}
+	tilemap->renderLayer(1);
 }
 
 void State::input(){

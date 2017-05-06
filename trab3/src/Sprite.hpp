@@ -13,10 +13,8 @@ class Sprite {
 	public:
 		Sprite();
 		Sprite(const std::string& file_name);
-		~Sprite();
 		void open(const std::string& file_name);
 		void setClip(int x, int y, int w, int h);
-		void close();
 		void render(int x, int y) const;
 		int getWidth() const;
 		int getHeight() const;

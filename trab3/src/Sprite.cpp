@@ -15,14 +15,8 @@ Sprite::Sprite(const std::string& file_name) : texture(nullptr) {
 	open(file_name);
 }
 
-Sprite::~Sprite() {
-	close();
-}
-
 void Sprite::open(const std::string& file_name) {
-	close();
-	std::string path = Game::getInstance().getPath() + "/img/" + file_name;
-	texture = IMG_LoadTexture(Game::getInstance().getRenderer(),path.c_str());
+	texture = Game::getInstance().resources.getImage(file_name);
 	if (texture == nullptr) {
 		fprintf(stderr, "%s\n", SDL_GetError());
 		return;
@@ -33,14 +27,6 @@ void Sprite::open(const std::string& file_name) {
 
 void Sprite::setClip(int x, int y, int w, int h){
 	clipRect = {x, y, w, h};
-}
-
-
-void Sprite::close() {
-	if (texture) {
-		SDL_DestroyTexture(texture);
-		texture = nullptr;
-	}
 }
 
 void Sprite::render(int x, int y) const {

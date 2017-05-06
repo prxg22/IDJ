@@ -4,8 +4,9 @@
 #include <vector>
 
 #include "Tileset.hpp"
+#include "Resource.hpp"
 
-class Tilemap
+class Tilemap : public Resource
 {
 private:
 	std::vector<int> tileMatrix;
@@ -14,9 +15,8 @@ private:
 	int height;
 	int depth;
 public:
-	Tilemap(const std::string& file, Tileset* tileset);
-	void load(const std::string& file);
-	void setTileset(Tileset* tileset);
+	Tilemap(const std::string& path);
+	~Tilemap();
 	inline int& at(int x, int y, int z = 0) {
 		return tileMatrix[z * width * height + y * width + x];
 	}
@@ -26,4 +26,5 @@ public:
 	int getHeight() const;
 	int getDepth() const;
 };
+
 #endif

@@ -6,7 +6,6 @@
 
 #include "Sprite.hpp"
 #include "GameObject.hpp"
-#include "Tileset.hpp"
 #include "Tilemap.hpp"
 
 class State{
@@ -14,8 +13,7 @@ class State{
 		Sprite bg;
 		bool _quitRequested;
 		std::list<std::unique_ptr<GameObject>> objectList;
-		Tileset tileset;
-		Tilemap tilemap;
+		Tilemap* tilemap;
 	public:
 		State();
 		~State();
