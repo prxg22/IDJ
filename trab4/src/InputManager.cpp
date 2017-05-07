@@ -25,7 +25,7 @@ void InputManager::update() {
 				_quitRequested = updateCounter;
 				break;
 			case SDL_KEYDOWN:
-				if(!isKeyDown(event.key.keysym.sym)){
+				if(!event.key.repeat){
 					keyUpdate[event.key.keysym.sym] = updateCounter;
 				}
 				keyState[event.key.keysym.sym] = true;
@@ -35,9 +35,7 @@ void InputManager::update() {
 				keyState[event.key.keysym.sym] = false;
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				if(!isMouseDown(event.button.button)){
-					mouseUpdate[event.button.button] = updateCounter;
-				}
+				mouseUpdate[event.button.button] = updateCounter;
 				mouseState[event.button.button] = true;
 				break;
 			case SDL_MOUSEBUTTONUP:
@@ -49,19 +47,22 @@ void InputManager::update() {
 	SDL_GetMouseState(&mouseX, &mouseY);
 }
 
-bool InputManager::keyPress(int key) const {
+bool InputManager::keyPress(int key) {
 	if(!keyUpdate.count(key)) {
 		return false;
 	}
-	
-	return keyUpdate.at(key) == updateCounter;
+	bool rt = keyUpdate[key] == updateCounter;
+	keyUpdate[key] = 0;
+	return rt;
 }
-bool InputManager::keyRelease(int key) const {
+bool InputManager::keyRelease(int key) {
 	if(!keyUpdate.count(key)) {
 		return false;
 	}
 	
-	return keyUpdate.at(key) == -updateCounter;
+	bool rt = keyUpdate[key] == -updateCounter;
+	keyUpdate[key] = 0;
+	return rt;
 }
 bool InputManager::isKeyDown(int key) const {
 	if(!keyState.count(key)) {
@@ -71,11 +72,15 @@ bool InputManager::isKeyDown(int key) const {
 	return keyState.at(key);
 }
 
-bool InputManager::mousePress(int button) const {
-	return mouseUpdate[button] == updateCounter;
+bool InputManager::mousePress(int button) {
+	bool rt = mouseUpdate[button] == updateCounter;
+	mouseUpdate[button] = 0;
+	return rt;
 }
-bool InputManager::mouseRelease(int button) const {
-	return mouseUpdate[button] == -updateCounter;
+bool InputManager::mouseRelease(int button) {
+	bool rt = mouseUpdate[button] == -updateCounter;
+	mouseUpdate[button] = 0;
+	return rt;
 }
 bool InputManager::isMouseDown(int button) const {
 	return mouseState[button];
