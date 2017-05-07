@@ -12,7 +12,31 @@ bool State::quitRequested() const {
 }
 
 void State::update(float dt){
-	input();
+	auto& input = Game::getInstance().input;
+	
+	_quitRequested = input.quitRequested();
+	
+	if(input.isMouseDown(SDL_BUTTON_LEFT)) {
+        for(auto it = objectList.rbegin(); it != objectList.rend(); it++) {
+            // Obtem o ponteiro e casta pra Face.
+            Face* face = (Face*) it->get();
+            // Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
+            // O propósito do unique_ptr é manter apenas uma cópia daquele ponteiro,
+            // ao usar get(), violamos esse princípio e estamos menos seguros.
+            // Esse código, assim como a classe Face, é provisório. Futuramente, para
+            // chamar funções de GameObjects, use (*it)->função() direto.
+            if(face->box.isInside((float)input.getMouseX(), (float)input.getMouseY())) {
+                // Aplica dano
+                face->damage(rand() % 10 + 10);
+                // Sai do loop (só queremos acertar um)
+                break;
+            }
+        }
+	}
+	
+	if(input.keyPress(SDLK_SPACE)){
+		addObject((float)input.getMouseX(), (float)input.getMouseY());
+	}
 	
 	for(auto it = objectList.begin(); it != objectList.end(); ) {
 		if((*it)->isDead()){
@@ -31,54 +55,6 @@ void State::render() {
 		obj->render();
 	}
 	tilemap->renderLayer(1);
-}
-
-void State::input(){
-	SDL_Event event;
-    int mouseX, mouseY;
-
-    // Obtenha as coordenadas do mouse
-    SDL_GetMouseState(&mouseX, &mouseY);
-
-    // SDL_PollEvent retorna 1 se encontrar eventos, zero caso contrário
-    while (SDL_PollEvent(&event)) {
-
-        // Se o evento for quit, setar a flag para terminação
-        if(event.type == SDL_QUIT) {
-            _quitRequested = true;
-        }
-        
-        // Se o evento for clique...
-        else if(event.type == SDL_MOUSEBUTTONDOWN) {
-            // Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
-            for(auto it = objectList.rbegin(); it != objectList.rend(); it++) {
-                // Obtem o ponteiro e casta pra Face.
-                Face* face = (Face*) it->get();
-                // Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
-                // O propósito do unique_ptr é manter apenas uma cópia daquele ponteiro,
-                // ao usar get(), violamos esse princípio e estamos menos seguros.
-                // Esse código, assim como a classe Face, é provisório. Futuramente, para
-                // chamar funções de GameObjects, use (*it)->função() direto.
-
-                if(face->box.isInside((float)mouseX, (float)mouseY)) {
-                    // Aplica dano
-                    face->damage(rand() % 10 + 10);
-                    // Sai do loop (só queremos acertar um)
-                    break;
-                }
-            }
-        }
-        else if( event.type == SDL_KEYDOWN ) {
-            // Se a tecla for ESC, setar a flag de quit
-            if( event.key.keysym.sym == SDLK_ESCAPE ) {
-                _quitRequested = true;
-            }
-            // Se não, crie um objeto
-            else {
-                addObject((float)mouseX, (float)mouseY);
-            }
-        }
-    }
 }
 
 void State::addObject(float mouseX, float mouseY) {

@@ -1,5 +1,5 @@
-#ifndef RESOURCES_HPP
-#define RESOURCES_HPP
+#ifndef RESOURCEMANAGER_HPP
+#define RESOURCEMANAGER_HPP
 
 #include <unordered_map>
 #include <string>
@@ -7,13 +7,13 @@
 
 #include "Tilemap.hpp"
 
-class Resources
+class ResourceManager
 {
 private:
 	std::unordered_map<std::string, Resource*> resourceTable;
 public:
-	Resources();
-	~Resources();
+	ResourceManager();
+	~ResourceManager();
 	SDL_Texture* getImage(const std::string& file);
 	Tilemap* getTilemap(const std::string& file);
 	void clear();

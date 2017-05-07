@@ -6,7 +6,8 @@
 #include <SDL2/SDL.h>
 
 #include "State.hpp"
-#include "Resources.hpp"
+#include "ResourceManager.hpp"
+#include "InputManager.hpp"
 
 class Game{
 	private:
@@ -15,7 +16,8 @@ class Game{
 		SDL_Renderer* renderer;
 		State* state;
 	public:
-		Resources resources;
+		ResourceManager resources;
+		InputManager input;
 		Game(const std::string& title, int width, int height);
 		~Game();
 		static Game& getInstance();

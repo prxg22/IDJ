@@ -21,7 +21,6 @@ class State{
 		void update(float dt);
 		void render();
 	private:
-		void input();
 		void addObject(float mouseX, float mouseY);
 };
 

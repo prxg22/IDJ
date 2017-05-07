@@ -58,6 +58,7 @@ void Game::run() {
 		// avanca todos os passos fixos que estiverem disponiveis no buffer de tempo
 		while (time_buffer >= fixed_step) {
 			time_buffer -= fixed_step;
+			input.update();
 			state->update(fixed_step/1000.0f);
 		}
 		// render

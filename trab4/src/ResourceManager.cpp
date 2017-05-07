@@ -1,15 +1,15 @@
-#include "Resources.hpp"
+#include "ResourceManager.hpp"
 
 #include <cstdio>
 
 #include "Game.hpp"
 #include "Texture.hpp"
 
-Resources::Resources(){}
-Resources::~Resources() {
+ResourceManager::ResourceManager(){}
+ResourceManager::~ResourceManager() {
 	clear();
 }
-SDL_Texture* Resources::getImage(const std::string& file) {
+SDL_Texture* ResourceManager::getImage(const std::string& file) {
 	std::string path = Game::getInstance().getPath() + "/img/" + file;
 	if(resourceTable.count(path)){
 		Texture* image = (Texture*) resourceTable[path];
@@ -24,7 +24,7 @@ SDL_Texture* Resources::getImage(const std::string& file) {
 	resourceTable[path] = image;
 	return image->sdlTexture;
 }
-Tilemap* Resources::getTilemap(const std::string& file) {
+Tilemap* ResourceManager::getTilemap(const std::string& file) {
 	std::string path = Game::getInstance().getPath() + "/map/" + file;
 	if(resourceTable.count(path)){
 		return (Tilemap*) resourceTable[path];
@@ -33,7 +33,7 @@ Tilemap* Resources::getTilemap(const std::string& file) {
 	resourceTable[path] = tilemap;
 	return tilemap;
 }
-void Resources::clear() {
+void ResourceManager::clear() {
 	for (auto& kv: resourceTable) {
 		delete kv.second;
 	}
