@@ -5,7 +5,7 @@
 # flag para tirar o console na versao final: -mwindows
 
 # parameters
-EXE      = trab3.exe
+EXE      = trab4.exe
 LIBS     = -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2
 
 CXX      = g++ -std=c++11
