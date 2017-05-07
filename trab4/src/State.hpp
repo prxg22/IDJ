@@ -1,7 +1,7 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-#include <list>
+#include <vector>
 #include <memory>
 
 #include "Sprite.hpp"
@@ -12,7 +12,7 @@ class State{
 	private:
 		Sprite bg;
 		bool _quitRequested;
-		std::list<std::unique_ptr<GameObject>> objectList;
+		std::vector<std::unique_ptr<GameObject>> objects;
 		Tilemap* tilemap;
 	public:
 		State();

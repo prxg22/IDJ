@@ -7,6 +7,8 @@ class GameObject
 {
 public:
 	Rect box;
+	int z;
+	GameObject();
 	virtual ~GameObject();
 	
 	virtual void update(float dt) = 0;

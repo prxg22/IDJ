@@ -18,7 +18,6 @@ InputManager::~InputManager(){}
 void InputManager::update() {
 	updateCounter++;
 	SDL_Event event;
-	
 	while(SDL_PollEvent(&event)) {
 		switch(event.type) {
 			case SDL_QUIT:
@@ -93,6 +92,8 @@ int InputManager::getMouseY() const {
 	return mouseY;
 }
 
-bool InputManager::quitRequested() const {
-	return _quitRequested == updateCounter;
+bool InputManager::quitRequested() {
+	bool rt = _quitRequested == updateCounter;
+	_quitRequested = 0;
+	return rt;
 }

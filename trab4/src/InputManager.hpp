@@ -39,7 +39,7 @@ public:
 	int getMouseX() const;
 	int getMouseY() const;
 	
-	bool quitRequested() const;
+	bool quitRequested();
 };
 
 #endif
