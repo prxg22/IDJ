@@ -1,6 +1,7 @@
 #include "State.hpp"
 
 #include <algorithm>
+#include <cstdio>
 
 #include "Face.hpp"
 #include "Vec2.hpp"

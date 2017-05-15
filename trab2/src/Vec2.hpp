@@ -19,6 +19,12 @@ public:
 	
 	Vec2 operator+(const Vec2& o) const;
 	Vec2& operator+=(const Vec2& o);
+	Vec2 operator-() const;
+	Vec2 operator-(const Vec2& o) const;
+	Vec2& operator-=(const Vec2& o);
+	Vec2& operator*=(T o);
+	Vec2 operator*(T o) const;
+
 
 	float norm() const;
 	float size() const;
@@ -29,6 +35,8 @@ public:
 	T size2() const;
 	T length2() const;
 	T len2() const;
+	
+	T dot(const Vec2& o) const;
 	
 	Vec2 rotate(float deg) const;
 };
@@ -56,6 +64,41 @@ Vec2<T>& Vec2<T>::operator+=(const Vec2& o){
 	return *this;
 }
 
+template <typename T>
+Vec2<T> Vec2<T>::operator-() const {
+	Vec2<T> v = *this;
+	v.x = -v.x;
+	v.y = -v.y;
+	return v;
+}
+
+template <typename T>
+Vec2<T> Vec2<T>::operator-(const Vec2& o) const {
+	Vec2<T> v = *this;
+	v -= o;
+	return v;
+}
+
+template <typename T>
+Vec2<T>& Vec2<T>::operator-=(const Vec2& o) {
+	*this += -o;
+	return *this;
+}
+
+template <typename T>
+Vec2<T>& Vec2<T>::operator*=(T o) {
+	x *= o;
+	y *= o;
+	
+	return *this;
+}
+
+template <typename T>
+Vec2<T> Vec2<T>::operator*(T o) const {
+	Vec2 v = *this;
+	v *= o;
+	return v;
+}
 
 template <typename T>
 float Vec2<T>::norm() const {
@@ -102,5 +145,12 @@ Vec2<T> Vec2<T>::rotate(float deg) const {
 	
 	return v;
 }
+
+template <typename T>
+T Vec2<T>::dot(const Vec2& o) const {
+	return x * o.x + y * o.y;
+}
+
+
 
 #endif

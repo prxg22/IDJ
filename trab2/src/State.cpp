@@ -12,7 +12,7 @@ bool State::quitRequested() const {
 
 void State::update(float dt){
 	input();
-	
+
 	for(auto it = objectList.begin(); it != objectList.end(); ) {
 		if((*it)->isDead()){
 			it = objectList.erase(it);
