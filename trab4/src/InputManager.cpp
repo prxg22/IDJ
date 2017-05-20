@@ -50,18 +50,14 @@ bool InputManager::keyPress(int key) {
 	if(!keyUpdate.count(key)) {
 		return false;
 	}
-	bool rt = keyUpdate[key] == updateCounter;
-	keyUpdate[key] = 0;
-	return rt;
+	return keyUpdate[key] == updateCounter;
 }
 bool InputManager::keyRelease(int key) {
 	if(!keyUpdate.count(key)) {
 		return false;
 	}
 	
-	bool rt = keyUpdate[key] == -updateCounter;
-	keyUpdate[key] = 0;
-	return rt;
+	return keyUpdate[key] == -updateCounter;
 }
 bool InputManager::isKeyDown(int key) const {
 	if(!keyState.count(key)) {
@@ -72,14 +68,10 @@ bool InputManager::isKeyDown(int key) const {
 }
 
 bool InputManager::mousePress(int button) {
-	bool rt = mouseUpdate[button] == updateCounter;
-	mouseUpdate[button] = 0;
-	return rt;
+	return mouseUpdate[button] == updateCounter;
 }
 bool InputManager::mouseRelease(int button) {
-	bool rt = mouseUpdate[button] == -updateCounter;
-	mouseUpdate[button] = 0;
-	return rt;
+	return mouseUpdate[button] == -updateCounter;
 }
 bool InputManager::isMouseDown(int button) const {
 	return mouseState[button];
@@ -93,7 +85,9 @@ int InputManager::getMouseY() const {
 }
 
 bool InputManager::quitRequested() {
-	bool rt = _quitRequested == updateCounter;
-	_quitRequested = 0;
-	return rt;
+	return _quitRequested == updateCounter;
+}
+
+int InputManager::getUpdateCounter() const {
+	return updateCounter;
 }

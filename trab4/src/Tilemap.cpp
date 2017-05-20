@@ -45,9 +45,12 @@ void Tilemap::render(int cameraX, int cameraY) {
 
 void Tilemap::renderLayer(int layer, int cameraX, int cameraY) {
 	int screenX;
+
+	cameraY = -cameraY;
 	for(int y = 0; y < height; y++){
-		screenX = cameraX;
+		screenX = -cameraX;
 		for(int x = 0; x < width; x++) {
+
 			tileset->render(at(x, y, layer), screenX, cameraY);
 			screenX += tileset->getTileWidth();
 		}

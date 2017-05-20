@@ -8,6 +8,7 @@
 #include "State.hpp"
 #include "ResourceManager.hpp"
 #include "InputManager.hpp"
+#include "Camera.hpp"
 
 class Game{
 	private:
@@ -18,6 +19,7 @@ class Game{
 	public:
 		ResourceManager resources;
 		InputManager input;
+		Camera camera;
 		Game(const std::string& title, int width, int height);
 		~Game();
 		static Game& getInstance();

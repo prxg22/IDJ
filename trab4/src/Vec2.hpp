@@ -23,6 +23,8 @@ public:
 	Vec2& operator-=(const Vec2& o);
 	Vec2& operator*=(T o);
 	Vec2 operator*(T o) const;
+	Vec2& operator/=(T o);
+	Vec2 operator/(T o) const;
 
 
 	float norm() const;
@@ -38,6 +40,8 @@ public:
 	T dot(const Vec2& o) const;
 	
 	Vec2 rotate(float deg) const;
+	static Vec2 zero();
+	Vec2 unitVec() const;
 };
 
 typedef Vec2<float>	Vec2f;

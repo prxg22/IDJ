@@ -40,6 +40,8 @@ public:
 	int getMouseY() const;
 	
 	bool quitRequested();
+
+	int getUpdateCounter() const;
 };
 
 #endif

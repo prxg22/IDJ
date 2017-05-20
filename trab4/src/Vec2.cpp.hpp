@@ -53,6 +53,20 @@ Vec2<T> Vec2<T>::operator*(T o) const {
 }
 
 template <typename T>
+Vec2<T>& Vec2<T>::operator/=(T o) {
+	x /= o;
+	y /= o;
+	return *this;
+}
+
+template <typename T>
+Vec2<T> Vec2<T>::operator/(T o) const {
+	Vec2<T> v = *this;
+	v /= o;
+	return v;
+}
+
+template <typename T>
 float Vec2<T>::norm() const {
 	return sqrt(x*x + y*y);
 }
@@ -102,3 +116,18 @@ template <typename T>
 T Vec2<T>::dot(const Vec2& o) const {
 	return x * o.x + y * o.y;
 }
+
+template <typename T>
+Vec2<T> Vec2<T>::zero() {
+	return Vec2<T>();
+}
+
+template <typename T>
+Vec2<T> Vec2<T>::unitVec() const {
+	float n = norm();
+	if (n == 0) {
+		return zero();
+	}
+	return *this / n;
+}
+
